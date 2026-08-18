@@ -266,7 +266,12 @@ fun OverviewTimeline(date: LocalDate, blocks: List<TimeBlock>, modifier: Modifie
     val dayHeight = (OverviewHourHeightDp * 24).dp
 
     LaunchedEffect(date) {
-        overviewScroll.scrollTo(with(density) { (OverviewHourHeightDp * 5).dp.roundToPx() })
+        val targetHour = if (date == LocalDate.now()) {
+            (LocalTime.now().hour - 2).coerceAtLeast(0)
+        } else {
+            6
+        }
+        overviewScroll.scrollTo(with(density) { (OverviewHourHeightDp * targetHour).dp.roundToPx() })
     }
 
     Row(
@@ -415,8 +420,18 @@ fun Timeline(
     val minuteHeight = MinuteHeightDp.dp
     val dayHeight = minuteHeight * 1440
     val sorted = blocks.sortedBy { it.start }
+    val density = LocalDensity.current
     var liftedBlockId by remember { mutableStateOf<String?>(null) }
     var activeBlockId by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(date) {
+        val targetMinute = if (date == LocalDate.now()) {
+            (LocalTime.now().hour * 60 + LocalTime.now().minute - 90).coerceAtLeast(0)
+        } else {
+            6 * 60
+        }
+        scrollState.scrollTo(with(density) { (targetMinute * MinuteHeightDp).dp.roundToPx() })
+    }
 
     Box(
         modifier = modifier
@@ -1022,7 +1037,7 @@ class TimeboxStore(context: Context) {
     fun load(date: LocalDate): List<TimeBlock> {
         val raw = prefs.getString(date.toString(), null)
         if (raw == null) {
-            return if (date == LocalDate.now()) defaultBlocks() else emptyList()
+            return emptyList()
         }
         return runCatching {
             val array = JSONArray(raw)
@@ -1053,10 +1068,4 @@ class TimeboxStore(context: Context) {
         prefs.edit().putString(date.toString(), array.toString()).apply()
     }
 
-    private fun defaultBlocks(): List<TimeBlock> = listOf(
-        TimeBlock(title = "아침 정리", start = 8 * 60, duration = 30, color = "blue"),
-        TimeBlock(title = "집중 작업", start = 9 * 60, duration = 120, color = "green"),
-        TimeBlock(title = "점심", start = 12 * 60 + 30, duration = 60, color = "yellow"),
-        TimeBlock(title = "리뷰와 정리", start = 16 * 60 + 30, duration = 60, color = "violet")
-    )
 }
