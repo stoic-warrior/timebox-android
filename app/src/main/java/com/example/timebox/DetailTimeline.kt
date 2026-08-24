@@ -84,7 +84,13 @@ fun DetailTimeline(
             .verticalScroll(scrollState)
     ) {
         Row(Modifier.height(dayHeight)) {
-            HourColumn(minuteHeight)
+            HourColumn(
+                minuteHeight = minuteHeight,
+                onTap = {
+                    activeBlockId = null
+                    liftedBlockId = null
+                }
+            )
             Box(
                 Modifier
                     .weight(1f)
@@ -156,13 +162,16 @@ fun DetailTimeline(
 }
 
 @Composable
-fun HourColumn(minuteHeight: Dp) {
+fun HourColumn(minuteHeight: Dp, onTap: () -> Unit = {}) {
     val theme = LocalAppTheme.current
     Column(
         modifier = Modifier
             .width(60.dp)
             .height(minuteHeight * DayMinutes)
             .background(theme.hourBg)
+            .pointerInput(Unit) {
+                detectTapGestures { onTap() }
+            }
     ) {
         repeat(24) { hour ->
             Box(
