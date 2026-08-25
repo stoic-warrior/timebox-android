@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 안드로이드 13+ 테마 아이콘용. 시스템이 색을 입히므로 흰색 단색으로 그린다. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36.5,24 h3 a1.5,1.5 0 0 1 1.5,1.5 v57 a1.5,1.5 0 0 1 -1.5,1.5 h-3 a1.5,1.5 0 0 1 -1.5,-1.5 v-57 a1.5,1.5 0 0 1 1.5,-1.5 z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M30,29 h6 v2 h-6 z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M30,43 h6 v2 h-6 z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M30,57 h6 v2 h-6 z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M30,71 h6 v2 h-6 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M49,28 h16 a5,5 0 0 1 5,5 v4 a5,5 0 0 1 -5,5 h-16 a5,5 0 0 1 -5,-5 v-4 a5,5 0 0 1 5,-5 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M49,46 h24 a5,5 0 0 1 5,5 v8 a5,5 0 0 1 -5,5 h-24 a5,5 0 0 1 -5,-5 v-8 a5,5 0 0 1 5,-5 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M49,68 h10 a5,5 0 0 1 5,5 v2 a5,5 0 0 1 -5,5 h-10 a5,5 0 0 1 -5,-5 v-2 a5,5 0 0 1 5,-5 z" />
+</vector>
